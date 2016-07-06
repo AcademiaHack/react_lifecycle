@@ -32,6 +32,7 @@ export default class Tweet extends React.Component {
     //No ejecuta la primera vez!
     //Recibe props y state para determinar si se debe repintar!
     //Retorna boolean!
+    return true;
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -40,12 +41,20 @@ export default class Tweet extends React.Component {
     //Recibe props y state para pre-calcular cosas antes del render!
   }
 
+  changeMe() {
+    this.setState({
+      body:"CLICKED!!"
+    });
+    this.props.changeAlert("HOLA!!");
+  }
+
   render() {
     console.log("PINTANDO!!");
     //NO MANEJAR EL DOM AQUI!!
     return (
       <div className="testing">
-        <h1>Esto es un tweet!!</h1>
+        <h1 onClick={this.changeMe.bind(this)}>Esto es un tweet!!</h1>
+        <p>{this.state.body}</p>
       </div>
     )
   }
@@ -53,7 +62,8 @@ export default class Tweet extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     console.log("El componente recien renderizo y la data actualizo");
     //No ejecuta la primera vez!
-    //Aqui se podria manejar el DOM, aunque es mejor esperar por componentDidMount
+    //Aqui se podria manejar el DOM
+    $('.alert').html("BLAH BLAH!");
   }
 
   componentDidMount() {
